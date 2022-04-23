@@ -1,0 +1,59 @@
+BootStrap: library
+From: ubuntu:21.04
+
+%post
+	pwd
+	apt-get update -y
+	apt install software-properties-common dirmngr -y	
+	apt-add-repository deb http://us.archive.ubuntu.com/ubuntu hirsute universe -y
+	apt-get update -y
+	apt-get install gnupg -y	
+	apt-get install wget -y
+	apt-get install make -y
+	apt-get install git -y
+	apt-get install gcc -y
+	apt-get install beagle -y
+	apt-get install openmpi-bin -y
+	apt install libopenmpi-dev -y
+	apt install libhmsbeagle-dev -y
+	export CC=/usr/bin/mpicc
+	export MPICC=/usr/bin/mpiCC
+	git clone --depth=1 https://github.com/NBISweden/MrBayes.git
+	cd MrBayes
+	./configure --with-mpi=yes && make && make install
+	apt-get update -y
+	wget https://repo.anaconda.com/archive/Anaconda3-2020.02-Linux-x86_64.sh
+	bash Anaconda3-2020.02-Linux-x86_64.sh -b -p /opt/anaconda3
+	export PATH=/opt/anaconda3/bin:$PATH
+	/opt/anaconda3/bin/conda install -c conda-forge r-ape -y --quiet
+    wget https://julialang-s3.julialang.org/bin/linux/x64/1.7/julia-1.7.2-linux-x86_64.tar.gz
+    mv julia-1.7.2-linux-x86_64.tar.gz /opt/
+    cd /opt
+    tar xvfz julia-1.7.2-linux-x86_64.tar.gz
+    export PATH=/opt/julia-1.7.2/bin:$PATH	
+	pip install lingpy
+	apt-get autoremove -y
+    apt-get clean
+	export JULIA_DEPOT_PATH=/julia
+	julia -e 'using Pkg; Pkg.add("CSV")'
+	julia -e 'using Pkg; Pkg.add("DataFrames")'
+	julia -e 'using Pkg; Pkg.add("DataStructures")'
+	julia -e 'using Pkg; Pkg.add("DelimitedFiles")'
+	julia -e 'using Pkg; Pkg.add("Distributions")'
+	julia -e 'using Pkg; Pkg.add("JSON")'
+	julia -e 'using Pkg; Pkg.add("MCPhylo")'
+	julia -e 'using Pkg; Pkg.add("MCPhyloTree")'
+	julia -e 'using Pkg; Pkg.add("Pipe")'
+	julia -e 'using Pkg; Pkg.add("ProgressMeter")'
+	julia -e 'using Pkg; Pkg.add("PyCall")'
+	julia -e 'using Pkg; Pkg.add(url="https://github.com/gerhardJaeger/SequenceAlignment.jl")'
+	julia -e 'using Pkg; Pkg.add("Statistics")'
+	julia -e 'using Pkg; Pkg.add("StatsFuns")'
+
+	
+
+%environment
+	export PATH=/opt/anaconda3/bin:$PATH
+    export LC_ALL=C
+    export PATH=/opt/julia-1.7.2/bin:$PATH
+	export JULIA_DEPOT_PATH=/julia
