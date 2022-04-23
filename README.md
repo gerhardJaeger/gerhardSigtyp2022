@@ -1,0 +1,1 @@
+# gerhardSigtyp2022
