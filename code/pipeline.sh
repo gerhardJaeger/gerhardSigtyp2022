@@ -7,5 +7,5 @@ julia code/createMBfile.jl $1
 mpirun -np 4 mb $dir/mrbayes/mb.nex
 bash code/extractPosteriorTrees.sh $dir
 julia code/estimateRates.jl $1
-julia code/reconstruction.jl $1
+julia code/cognatePrediction.jl $1
 
