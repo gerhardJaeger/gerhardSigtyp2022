@@ -35,7 +35,7 @@ or to run `julia` with the flag `--project=code`.
 
 ### Using Singularity
 
-The least painful way to reproduce my workflow is to use a Singularity container. `gjSigtyp2022.def` is a Singularity definition file for a Singularity image. You can also download Singularity image from 'https://unitc-my.sharepoint.com/:u:/g/personal/nwsja01_cloud_uni-tuebingen_de/EbCMvXu0LSBLlqqv84H56qUBGmeTv90-dl0k9q4C-KtyMA?e=cu6jMt&download=1'
+The least painful way to reproduce my workflow is to use a Singularity container. `gjSigtyp2022.def` is a Singularity definition file for a Singularity image. You can also download the Singularity image from 'https://unitc-my.sharepoint.com/:u:/g/personal/nwsja01_cloud_uni-tuebingen_de/EbCMvXu0LSBLlqqv84H56qUBGmeTv90-dl0k9q4C-KtyMA?e=cu6jMt&download=1' and put it into the repository’s root directory.
 
 Be warned, it’s 3 GB.
 
@@ -73,4 +73,4 @@ When using the Singularity container, you don’t have to alter the Julia projec
 
   
 
-During computation, a directory `tmp ` will be created, containing lots of file with intermediate stages of the workflow. The results of the computation are saved as result tsv files inside the `ST2022 ` directory.
+During computation, a directory `tmp ` will be created, containing lots of files with intermediate stages of the workflow. The results of the computation are saved as result tsv files inside the `ST2022 ` directory.
