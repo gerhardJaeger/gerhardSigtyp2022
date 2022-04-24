@@ -19,4 +19,3 @@ dependencies:
   - openmpi=4.0.2=hb1b8bf9_1
   - readline=8.0=h7b6447c_0
   - zlib=1.2.11=h7f8727e_4
-prefix: /home/gjaeger/anaconda3/envs/mrbayes

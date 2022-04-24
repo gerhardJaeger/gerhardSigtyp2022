@@ -17,7 +17,7 @@ The following software has to be installed to run the code:
 
 ### Using Conda
 
-Instead of installing the right versions of *python*, *R* and *ape*, you can create *conda* environment. Edit the `prefix` line in the *yml*-files according to your local configuration and run the command in the repository’s root directory:
+Instead of installing the right versions of *python*, *R* and *ape*, you can create *conda* environment. Run the command in the repository’s root directory:
 
 `conda env create -f sigtyp2022.yml && conda activate sigtyp2022`
 
