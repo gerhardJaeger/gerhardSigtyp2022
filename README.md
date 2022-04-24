@@ -68,7 +68,7 @@ When using the Singularity container, you don’t have to alter the Julia projec
   mpirun -np 4 mb $dir/mrbayes/mb.nex
   bash code/extractPosteriorTrees.sh <trainingFile>
   julia code/estimateRates.jl <trainingFile>
-  julia code/reconstruction.jl <trainingFile>
+  julia code/cognatePrediction.jl <trainingFile>
   ```
 
   
