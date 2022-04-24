@@ -38,12 +38,11 @@ tr = CSV.File("data/training.tsv", types=String) |> DataFrame
 
 ts = CSV.File("data/test.tsv", types=String) |> DataFrame;
 
-# filter!(x -> x.TOKENS != "?", ts)
+
 
 ##
 insertcols!(tr, 1, :ID => 1:size(tr, 1))
 
-#insertcols!(ts, 1, :ID => 1:size(ts, 1))
 
 ##
 
@@ -341,7 +340,7 @@ end
 
 ccTs = unique(ts.COGID)
 algDict = Dict()
-for (i,s) in zip(ts.ID, ts.TOKENS)
+for (i,s) in zip(ts.ID, ts.TOKENS_C)
     if s == "?"
         algDict[i] = "?"
     end
@@ -351,7 +350,7 @@ end
 
 for cc in ccTs
     ccData = filter(x -> x.COGID == cc, ts)
-    filter!(x -> x.TOKENS != "?", ccData)
+    filter!(x -> x.TOKENS_C != "?", ccData)
     words = ccData[:, SC]
     new_ph = newPhmm(ph, words)
     alg = tCoffee(words, ccData.TAXON, tree, new_ph)
@@ -377,7 +376,6 @@ function copyAlignment(v, s)
     for x in v
         if x ∈ ["-", "?"]
             push!(sa, x)
-
         else
             push!(sa, popfirst!(s))
         end
@@ -387,28 +385,28 @@ end
 
 ##
 
-if SC != :TOKENS
-    aTokens = []
-    for (v, s) in zip(tr[:, aColumn], tr.TOKENS)
+if SC != :TOKENS_C
+    aTOKENS_C = []
+    for (v, s) in zip(tr[:, aColumn], tr.TOKENS_C)
         push!(
-            aTokens,
+            aTOKENS_C,
             copyAlignment(split(v), split(s))
         )
     end
     insertcols!(
         tr,
-        :A_IPA => aTokens
+        :A_IPA => aTOKENS_C
     )
-    aTokens = []
-    for (v, s) in zip(ts[:, aColumn], ts.TOKENS)
+    aTOKENS_C = []
+    for (v, s) in zip(ts[:, aColumn], ts.TOKENS_C)
         push!(
-            aTokens,
+            aTOKENS_C,
             copyAlignment(split(v), split(s))
         )
     end
     insertcols!(
         ts,
-        :A_IPA => aTokens
+        :A_IPA => aTOKENS_C
     )
 end
 
@@ -416,27 +414,27 @@ end
 
 
 if SC != :ASJP
-    aTokens = []
+    aTOKENS_C = []
     for (v, s) in zip(tr[:, aColumn], tr.ASJP)
         push!(
-            aTokens,
+            aTOKENS_C,
             copyAlignment(split(v), split(s))
         )
     end
     insertcols!(
         tr,
-        :A_ASJP => aTokens
+        :A_ASJP => aTOKENS_C
     )
-    aTokens = []
+    aTOKENS_C = []
     for (v, s) in zip(ts[:, aColumn], ts.ASJP)
         push!(
-            aTokens,
+            aTOKENS_C,
             copyAlignment(split(v), split(s))
         )
     end
     insertcols!(
         ts,
-        :A_ASJP => aTokens
+        :A_ASJP => aTOKENS_C
     )
 end
 
@@ -444,27 +442,27 @@ end
 
 
 if SC != :DOLGO
-    aTokens = []
+    aTOKENS_C = []
     for (v, s) in zip(tr[:, aColumn], tr.DOLGO)
         push!(
-            aTokens,
+            aTOKENS_C,
             copyAlignment(split(v), split(s))
         )
     end
     insertcols!(
         tr,
-        :A_DOLGO => aTokens
+        :A_DOLGO => aTOKENS_C
     )
-    aTokens = []
+    aTOKENS_C = []
     for (v, s) in zip(ts[:, aColumn], ts.DOLGO)
         push!(
-            aTokens,
+            aTOKENS_C,
             copyAlignment(split(v), split(s))
         )
     end
     insertcols!(
         ts,
-        :A_DOLGO => aTokens
+        :A_DOLGO => aTOKENS_C
     )
 end
 

@@ -89,6 +89,16 @@ insertcols!(ts_stacked, 1, :ID => 1:nrow(ts_stacked))
 
 ##
 
+
+function cleanIpa(w)
+    if w=="?"
+        return w
+    end
+    v = filter(x -> x != "+", split(w))
+    join(v, " ")
+end
+
+
 function ipa2sca(w)
     if w=="?"
         return w
@@ -117,41 +127,55 @@ function ipa2asjp(w)
 end
 
 
+##
+
+insertcols!(
+    tr_stacked,
+    :TOKENS_C => cleanIpa.(tr_stacked.TOKENS)
+)
+
+insertcols!(
+    ts_stacked,
+    :TOKENS_C => cleanIpa.(ts_stacked.TOKENS)
+)
 
 ##
 
 insertcols!(
     tr_stacked,
-    :SCA => ipa2sca.(tr_stacked.TOKENS)
+    :SCA => ipa2sca.(tr_stacked.TOKENS_C)
 )
 
 insertcols!(
     tr_stacked,
-    :DOLGO => ipa2dolgo.(tr_stacked.TOKENS)
+    :DOLGO => ipa2dolgo.(tr_stacked.TOKENS_C)
 )
 
 insertcols!(
     tr_stacked,
-    :ASJP => ipa2asjp.(tr_stacked.TOKENS)
+    :ASJP => ipa2asjp.(tr_stacked.TOKENS_C)
 )
 
 
 ##
 
 
+
+##
+
 insertcols!(
     ts_stacked,
-    :SCA => ipa2sca.(ts_stacked.TOKENS)
+    :SCA => ipa2sca.(ts_stacked.TOKENS_C)
 )
 
 insertcols!(
     ts_stacked,
-    :DOLGO => ipa2dolgo.(ts_stacked.TOKENS)
+    :DOLGO => ipa2dolgo.(ts_stacked.TOKENS_C)
 )
 
 insertcols!(
     ts_stacked,
-    :ASJP => ipa2asjp.(ts_stacked.TOKENS)
+    :ASJP => ipa2asjp.(ts_stacked.TOKENS_C)
 )
 
 
