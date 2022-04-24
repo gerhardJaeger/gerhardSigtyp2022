@@ -1,7 +1,10 @@
+flag = string(strip(ARGS[1], '/'))
 
-project, type = ARGS[1], ARGGS[2]
+_, type, dataset, fn = split(flag, "/")
 
-dataset, proportion = split(project,"-")
+proportion = replace(fn, r"[^-]*-" => "", ".tsv" => "")
+
+project = "tmp/$type/$dataset-$proportion"
 
 
 cd(project)
@@ -209,7 +212,7 @@ end
 rDict = Dict(zip(cClasses, recs))
 
 ##
-testF = "../ST2022/$type/$dataset/test-$proportion.tsv"
+testF = "../../../ST2022/$type/$dataset/test-$proportion.tsv"
 
 
 ts = CSV.File(testF, types=String) |> DataFrame
@@ -228,7 +231,7 @@ end
 
 ##
 
-resultF = "../ST2022/$type/$dataset/result-$proportion.tsv"
+resultF = "../../../ST2022/$type/$dataset/result-$proportion.tsv"
 
 CSV.write(resultF, results, delim="\t")
 

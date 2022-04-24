@@ -1,2 +1,2 @@
 cd $1
-R --vanilla < ../code/extractPosteriorTrees.r 
+R --vanilla < ../../../code/extractPosteriorTrees.r 

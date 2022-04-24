@@ -1,6 +1,10 @@
-project = ARGS[1]
-dataset, proportion = split(project,"-")
+flag = string(strip(ARGS[1], '/'))
 
+_, type, dataset, fn = split(flag, "/")
+
+proportion = replace(fn, r"[^-]*-" => "", ".tsv" => "")
+
+project = "tmp/$type/$dataset-$proportion"
 
 cd(project)
 

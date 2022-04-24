@@ -1,7 +1,12 @@
 
 ##
-project = ARGS[1]
-dataset, proportion = split(project,"-")
+flag = string(strip(ARGS[1], '/'))
+##
+_, type, dataset, fn = split(flag, "/")
+
+proportion = replace(fn, r"[^-]*-" => "", ".tsv" => "")
+
+project = "tmp/$type/$dataset-$proportion"
 
 
 cd(project)
@@ -192,8 +197,8 @@ sim = mcmc(
     model,
     data_dictionary,
     inits,
-    2000,
-    burnin=1000,
+    1000,
+    burnin=0,
     thin=10,
     chains=nchains,
     trees=false,
@@ -202,11 +207,14 @@ sim = mcmc(
 
 ##
 
-gd = gelmandiag(sim[:, :a, :]).value[1,1,1]
+bi = size(sim,1) ÷ 2
+
+gd = gelmandiag(sim[(bi+1):end, :a, :]).value[1,1,1]
 
 while gd > 1.1
     global sim = mcmc(sim, 1000)
-    global gd = gelmandiag(sim[:, :a, :]).value[1,1,1]
+    global bi = size(sim,1) ÷ 2
+    global gd = gelmandiag(sim[(bi+1):end, :a, :]).value[1,1,1]
 end
 
 # open("data/gelmandiag.tsv", "w") do file
@@ -216,5 +224,5 @@ end
 ##
 
 open("data/posteriorRates.csv", "w") do file
-    writedlm(file, vec(sim[:, :a, :].value))
+    writedlm(file, vec(sim[(bi+1):end, :a, :].value))
 end

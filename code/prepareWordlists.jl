@@ -1,6 +1,34 @@
-project, type = ARGS[1], ARGS[2]
 
-dataset, proportion = split(project,"-")
+
+##
+flag = string(strip(ARGS[1], '/'))
+
+_, type, dataset, fn = split(flag, "/")
+
+proportion = replace(fn, r"[^-]*-" => "", ".tsv" => "")
+
+project = "tmp/$type/$dataset-$proportion"
+
+##
+
+try
+    mkdir("tmp")
+catch e
+end
+
+try
+    mkdir("tmp/$type")
+catch e
+end
+
+try
+    mkdir("tmp/$type/$dataset-$proportion")
+catch e
+end
+
+
+##
+
 
 cd(project)
 
@@ -17,8 +45,8 @@ lp = pyimport("lingpy")
 
 ##
 
-trainingF = "../ST2022/$type/$dataset/training-$proportion.tsv"
-testF = "../ST2022/$type/$dataset/test-$proportion.tsv"
+trainingF = "../../../ST2022/$type/$dataset/training-$proportion.tsv"
+testF = "../../../ST2022/$type/$dataset/test-$proportion.tsv"
 
 tr = CSV.File(trainingF, types=String) |> DataFrame
 ts = CSV.File(testF, types=String) |>  DataFrame
