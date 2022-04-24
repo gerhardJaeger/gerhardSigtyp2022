@@ -26,14 +26,14 @@ From: ubuntu:21.04
 	bash Anaconda3-2020.02-Linux-x86_64.sh -b -p /opt/anaconda3
 	export PATH=/opt/anaconda3/bin:$PATH
 	/opt/anaconda3/bin/conda install -c conda-forge r-ape -y --quiet
-    wget https://julialang-s3.julialang.org/bin/linux/x64/1.7/julia-1.7.2-linux-x86_64.tar.gz
-    mv julia-1.7.2-linux-x86_64.tar.gz /opt/
-    cd /opt
-    tar xvfz julia-1.7.2-linux-x86_64.tar.gz
-    export PATH=/opt/julia-1.7.2/bin:$PATH	
+    	wget https://julialang-s3.julialang.org/bin/linux/x64/1.7/julia-1.7.2-linux-x86_64.tar.gz
+    	mv julia-1.7.2-linux-x86_64.tar.gz /opt/
+    	cd /opt
+    	tar xvfz julia-1.7.2-linux-x86_64.tar.gz
+    	export PATH=/opt/julia-1.7.2/bin:$PATH	
 	pip install lingpy
 	apt-get autoremove -y
-    apt-get clean
+    	apt-get clean
 	export JULIA_DEPOT_PATH=/julia
 	julia -e 'using Pkg; Pkg.add("CSV")'
 	julia -e 'using Pkg; Pkg.add("DataFrames")'
@@ -54,6 +54,6 @@ From: ubuntu:21.04
 
 %environment
 	export PATH=/opt/anaconda3/bin:$PATH
-    export LC_ALL=C
-    export PATH=/opt/julia-1.7.2/bin:$PATH
+    	export LC_ALL=C
+    	export PATH=/opt/julia-1.7.2/bin:$PATH
 	export JULIA_DEPOT_PATH=/julia
