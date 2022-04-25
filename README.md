@@ -73,4 +73,4 @@ When using the Singularity container, you don’t have to alter the Julia projec
 
   
 
-During computation, a directory `tmp` will be created, containing lots of files with intermediate stages of the workflow. The results of the computation are saved as result tsv files inside the `ST2022` directory.
+During computation, a directory `tmp` will be created, containing lots of files with intermediate stages of the workflow. The results of the computation are saved as result tsv files inside the `ST2022` directory under `systems/jaeger-prediction`.
