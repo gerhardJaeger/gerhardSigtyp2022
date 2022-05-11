@@ -59,14 +59,14 @@ When using the Singularity container, you don’t have to alter the Julia projec
 - run the following commands in that order:
 
   ```shell
-  export dir=`echo <trainingFile> | sed 's/.training//' | sed 's/.tsv//' | sed 's/ST2022/tmp/'` 
+  export dir=`echo <trainingFile> | sed 's/.training//' | sed 's/.tsv//' | sed 's/ST2022/tmp/' | sed 's/\/test//'` 
   julia code/prepareWordlists.jl <trainingFile>
   julia code/baumWelchTraining.jl <trainingFile>
   julia code/upgmaTree.jl <trainingFile>
   julia code/tcoffeeAlignment.jl <trainingFile>
   julia code/createMBfile.jl <trainingFile>
   mpirun -np 4 mb $dir/mrbayes/mb.nex
-  bash code/extractPosteriorTrees.sh <trainingFile>
+  bash code/extractPosteriorTrees.sh $dir
   julia code/estimateRates.jl <trainingFile>
   julia code/cognatePrediction.jl <trainingFile>
   ```

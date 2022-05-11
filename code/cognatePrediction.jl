@@ -1,3 +1,5 @@
+
+##
 flag = string(strip(ARGS[1], '/'))
 
 _, type, dataset, fn = split(flag, "/")
@@ -233,9 +235,9 @@ end
 
 resultF = ""
 if type=="data"
-    global resultF = "../../../ST2022/system/jaeger-prediction/training/$dataset/result-$proportion.tsv"
+    global resultF = "../../../ST2022/systems/jaeger-prediction/training/$dataset/result-$proportion.tsv"
 else
-    global resultF = "../../../ST2022/system/jaeger-prediction/surprise/$dataset/result-$proportion.tsv"
+    global resultF = "../../../ST2022/systems/jaeger-prediction/surprise/$dataset/result-$proportion.tsv"
 end
 
 CSV.write(resultF, results, delim="\t")
